@@ -1,0 +1,8 @@
+
+do it hardcoded at first
+
+
+make it like a wizard
+prompt for git url
+
+use the library that vue cli is written with

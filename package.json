@@ -1,0 +1,14 @@
+{
+  "name": "clone-all-remote-branches",
+  "version": "1.0.0",
+  "description": "",
+  "main": "checkout-all-branches.js",
+  "scripts": {
+    "start": "node clone-all-remote-branches.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "^0.8.3"
+  }
+}
