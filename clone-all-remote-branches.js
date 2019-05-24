@@ -12,10 +12,11 @@ const repoName = "RestaurantReview";
 shell.mkdir("-p", repoParentDir);
 shell.cd(repoParentDir);
 // i should probably only clone depth 1
-shell.exec(`git clone ${repoUrl} ${repoName}`);
+// shell.exec(`git clone ${repoUrl} ${repoName}`);
+shell.exec(`git clone --depth 1 ${repoUrl} ${repoName}`);
 shell.cd(repoName);
 // probably not needed
-shell.exec("git fetch");
+// shell.exec("git fetch");
 
 // cant use const in debugger mode
 var branches = shell
