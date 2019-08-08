@@ -10,7 +10,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/checkout-all-branches.js",
+      "program": "${workspaceFolder}/clone-all-remote-branches.js",
       "outputCapture": "std"
     }
   ]

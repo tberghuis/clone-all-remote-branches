@@ -1,19 +1,33 @@
 const shell = require("shelljs");
+const argv = require("minimist")(process.argv.slice(2));
 
-// const repoUrl = "https://github.com/kentcdodds/react-github-profile";
-// var repoParentDir = "/home/tom/tmp/checkout-all-branches/";
-// const repoName = "react-github-profile";
-const repoUrl = "https://github.com/nanohop/RestaurantReview.git";
-var repoParentDir = "/home/tom/Desktop/egghead/react-native/RestaurantReview/";
-const repoName = "RestaurantReview";
+if (
+  !argv.u ||
+  !argv.n ||
+  !argv.o ||
+  typeof argv.u !== "string" ||
+  typeof argv.n !== "string" ||
+  typeof argv.o !== "string"
+) {
+  console.log(
+    "Usage: clone-all-branches.sh -u <repo url> -n <repo name> -o <output dir>"
+  );
+  console.log("Example:");
+  console.log(
+    "checkout-all-branches.sh -u https://github.com/nanohop/RestaurantReview.git -n RestaurantReview -o /home/tom/Desktop/egghead/react-native/RestaurantReview/"
+  );
+  process.exit(1);
+}
+
+const repoUrl = argv.u;
+var repoParentDir = argv.o;
+const repoName = argv.n;
 
 // debugger;
 
 shell.mkdir("-p", repoParentDir);
 shell.cd(repoParentDir);
-// i should probably only clone depth 1
-// shell.exec(`git clone ${repoUrl} ${repoName}`);
-shell.exec(`git clone --depth 1 ${repoUrl} ${repoName}`);
+shell.exec(`git clone ${repoUrl} ${repoName}`);
 shell.cd(repoName);
 // probably not needed
 // shell.exec("git fetch");
