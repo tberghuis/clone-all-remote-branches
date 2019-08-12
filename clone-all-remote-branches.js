@@ -3,25 +3,22 @@ const argv = require("minimist")(process.argv.slice(2));
 
 if (
   !argv.u ||
-  !argv.n ||
   !argv.o ||
   typeof argv.u !== "string" ||
-  typeof argv.n !== "string" ||
   typeof argv.o !== "string"
 ) {
-  console.log(
-    "Usage: clone-all-branches.sh -u <repo url> -n <repo name> -o <output dir>"
-  );
+  console.log("Usage: checkout-all-branches.sh -u <repo url> -o <output dir>");
   console.log("Example:");
   console.log(
-    "checkout-all-branches.sh -u https://github.com/nanohop/RestaurantReview.git -n RestaurantReview -o /home/tom/Desktop/egghead/react-native/RestaurantReview/"
+    "checkout-all-branches.sh -u https://github.com/nanohop/RestaurantReview.git -o /home/tom/Desktop/egghead/react-native/RestaurantReview/"
   );
   process.exit(1);
 }
 
 const repoUrl = argv.u;
-var repoParentDir = argv.o;
-const repoName = argv.n;
+shell.cd(argv.o);
+var repoParentDir = shell.pwd().stdout;
+const repoName = repoUrl.substring(repoUrl.lastIndexOf("/") + 1).split(".")[0];
 
 // debugger;
 
@@ -48,7 +45,7 @@ branches.forEach(function(branch) {
   shell.cd(repoParentDir);
   shell.mkdir("-p", `branches/${branch}`);
   shell.cd(`${repoParentDir}/branches/${branch}`);
-  shell.exec(`git clone --depth 1  --branch ${branch} ${repoUrl} ${repoName}`);
+  shell.exec(`git clone --depth 1  --branch ${branch} ${repoUrl} .`);
 });
 
 console.log("done");
